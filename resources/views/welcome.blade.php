@@ -85,9 +85,6 @@
                         @click ="sendName">
                         Send
                     </v-btn>
-                    <v-data-table>
-
-                    </v-data-table>
                 </v-main>
             </v-app>
         </div>
@@ -112,12 +109,12 @@
                             this.vis = !this.vis
                         },
 
-                        sendName(){
+                        async sendName(){
                             let data = new FormData()
                             data.append('FIO', this.FIO)
 
 
-                            fetch('/sendName',{
+                            await fetch('/sendName',{
                                 method: 'POST',
                                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                                 body: data
@@ -127,10 +124,11 @@
                                 return response.json()
                             })
 
-                                .then((data)=>{
-                                    console.log(data)
-                                })
+                            .then((data)=>{
+                                console.log(data)
+                            })
 
+                            console.log("I'm here")
 
                         },
 
@@ -140,8 +138,7 @@
                     },
 
                 mounted: function(){
-                   beforePrint();
-                   console.log("sdfsdf")
+
                 }
             })
         </script>
